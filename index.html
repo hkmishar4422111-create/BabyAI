@@ -1,219 +1,225 @@
 
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17102f">
 <title>Baby AI ❤️</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(145deg,#ffe0ed,#e8dfff,#d9f3ff);
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #49334c;
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:18px;
+ background:linear-gradient(145deg,#160d32,#351746,#111b3d);
+ font-family:Arial,sans-serif;color:white;
+ display:flex;justify-content:center;align-items:center
 }
-.app {
-  width: 92%;
-  max-width: 420px;
-  background: #ffffffdd;
-  border-radius: 28px;
-  padding: 25px 20px;
-  text-align: center;
-  box-shadow: 0 12px 35px #8c6c9c33;
+.app{
+ width:100%;max-width:460px;background:#ffffff12;
+ border:1px solid #ffffff30;border-radius:28px;
+ padding:22px;box-shadow:0 15px 45px #0008;text-align:center
 }
-h1 { color: #e65b9b; margin: 5px; }
-.avatar {
-  width: 135px;
-  height: 135px;
-  margin: 18px auto;
-  border-radius: 50%;
-  background: linear-gradient(135deg,#ffb6d5,#c6a8ff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 75px;
-  box-shadow: 0 5px 20px #d58ab866;
+h1{color:#ff79c4;margin:4px}
+.sub{color:#e8cce8}
+.avatar{
+ width:118px;height:118px;margin:18px auto;border-radius:50%;
+ display:grid;place-items:center;font-size:68px;
+ background:linear-gradient(135deg,#ffacd5,#a58bff);
+ border:4px solid #fff7;box-shadow:0 0 25px #ff70c888
 }
-#status { color: #9b6390; min-height: 24px; }
-.chat {
-  background: #fff4fa;
-  border-radius: 18px;
-  padding: 15px;
-  min-height: 85px;
-  margin: 15px 0;
-  text-align: left;
-  line-height: 1.6;
+#status{color:#ffc8e7;min-height:25px}
+.chat{
+ background:#ffffff16;border:1px solid #ffffff25;
+ border-radius:18px;padding:16px;min-height:100px;
+ text-align:left;line-height:1.55;margin:14px 0;white-space:pre-wrap
 }
-input {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #efc4dc;
-  border-radius: 14px;
-  font-size: 16px;
-  outline: none;
+input,select{
+ width:100%;padding:14px;border:1px solid #d9b5e8;
+ border-radius:14px;font-size:16px;margin:6px 0;
+ background:white;color:#241532
 }
-button {
-  border: 0;
-  border-radius: 30px;
-  padding: 13px 20px;
-  margin: 7px 3px;
-  background: #e967a5;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+button{
+ border:0;border-radius:24px;padding:13px 16px;
+ margin:5px;background:#ec4b9d;color:white;
+ font-size:15px;font-weight:bold
 }
-button:active { transform: scale(.96); }
-.mic { background: #9c72dc; font-size: 19px; }
-.small { background: #777; font-size: 13px; }
+button.secondary{background:#7656c9}
+button.appbtn{background:#172e63;border:1px solid #7da7ff}
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+.note{font-size:12px;color:#d8c6e5;line-height:1.5;margin-top:14px}
 </style>
 </head>
 <body>
-<div class="app">
-  <h1>Baby AI ❤️</h1>
-  <div class="avatar">👩🏻</div>
-  <div id="status">नमस्ते! मैं Baby हूँ। 🥰</div>
+<main class="app">
+<h1>Baby AI 💗</h1>
+<div class="sub">Your cute AI friend</div>
+<div class="avatar">👩🏻‍🦰</div>
 
-  <div class="chat" id="chat">
-    <b>Baby:</b> हाँ जी! बताइए, मैं आपकी क्या मदद करूँ?
-  </div>
+<div id="status">नमस्ते! Hello! मैं Baby हूँ 🥰</div>
 
-  <input id="message" placeholder="Baby से कुछ बोलिए या लिखिए...">
-
-  <div>
-    <button onclick="sendMessage()">भेजें 💗</button>
-    <button class="mic" onclick="listen()">🎤 बोलें</button>
-  </div>
-  <button class="small" onclick="speak('हाँ Baby, मैं आपकी बात सुन रही हूँ।')">
-    🔊 आवाज़ सुनें
-  </button>
+<div class="chat" id="chat">
+<b>Baby:</b> तुम मुझसे हिंदी या English में बात कर सकते हो। ❤️
 </div>
 
+<select id="language">
+<option value="hi-IN">हिंदी (Hindi)</option>
+<option value="en-IN">English (India)</option>
+</select>
+
+<input id="message" placeholder="यहाँ लिखें / Type a message...">
+
+<div class="row">
+<button onclick="sendMessage()">भेजें / Send 💗</button>
+<button class="secondary" onclick="listen()">🎤 बोलें / Speak</button>
+<button class="secondary" onclick="sayWelcome()">🔊 आवाज़ जाँचें</button>
+</div>
+
+<div class="row">
+<button class="appbtn" onclick="openApp('youtube')">▶ YouTube</button>
+<button class="appbtn" onclick="openApp('whatsapp')">WhatsApp</button>
+<button class="appbtn" onclick="openApp('chrome')">🌐 Chrome</button>
+<button class="appbtn" onclick="openApp('camera')">📷 Camera</button>
+<button class="appbtn" onclick="openApp('maps')">📍 Maps</button>
+<button class="appbtn" onclick="openApp('settings')">⚙ Settings</button>
+</div>
+
+<div class="note">
+माइक बोलें बटन दबाने पर सुनेगा। स्क्रीन बंद होने पर Baby बोलकर जगाने के लिए अलग Android ऐप बनाना होगा।
+</div>
+</main>
+
 <script>
-const chat = document.getElementById("chat");
-const statusText = document.getElementById("status");
+const $=id=>document.getElementById(id);
+function currentLang(){return $('language').value}
 
-function show(text) {
-  chat.innerHTML = "<b>Baby:</b> " + text;
+function show(text){
+ $('chat').textContent='Baby: '+text;
 }
 
-function speak(text) {
-  if (!("speechSynthesis" in window)) {
-    statusText.innerText = "इस ब्राउज़र में आवाज़ उपलब्ध नहीं है।";
-    return;
-  }
-
-  speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = "hi-IN";
-  msg.rate = 0.92;
-  msg.pitch = 1.12;
-
-  const voices = speechSynthesis.getVoices();
-  const hindiVoice = voices.find(v =>
-    v.lang.toLowerCase().startsWith("hi")
-  );
-  if (hindiVoice) msg.voice = hindiVoice;
-
-  speechSynthesis.speak(msg);
+function speak(text){
+ if(!('speechSynthesis' in window)){
+  $('status').textContent='आवाज़ उपलब्ध नहीं है।';
+  return;
+ }
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang=currentLang();
+ u.rate=.92;
+ u.pitch=1.12;
+ const voices=speechSynthesis.getVoices();
+ const prefix=currentLang().slice(0,2).toLowerCase();
+ const v=voices.find(x=>x.lang.toLowerCase().startsWith(prefix));
+ if(v)u.voice=v;
+ speechSynthesis.speak(u);
 }
 
-function openApp(app) {
-  if (app === "youtube") {
-    window.location.href = "vnd.youtube://";
-    setTimeout(() => {
-      window.location.href = "https://www.youtube.com/";
-    }, 1200);
-  } else {
-    window.location.href = "intent://send/#Intent;scheme=whatsapp;package=com.whatsapp;end";
-    setTimeout(() => {
-      window.location.href = "https://www.whatsapp.com/";
-    }, 1200);
-  }
+function sayWelcome(){
+ speak(currentLang()==='hi-IN'
+ ?'नमस्ते! मैं Baby हूँ। आप कैसे हैं?'
+ :'Hello! I am Baby. How are you?');
 }
 
-function reply(text) {
-  const q = text.toLowerCase().trim();
+function reply(raw){
+ const q=raw.toLowerCase().trim();
+ let a;
 
-  if (q.includes("youtube")) {
-    show("हाँ Baby, मैंने खोल दिया YouTube। ❤️");
-    speak("हाँ Baby, मैंने खोल दिया YouTube।");
-    openApp("youtube");
-  }
-  else if (q.includes("whatsapp") || q.includes("व्हाट्सएप")) {
-    show("हाँ Baby, मैंने खोल दिया WhatsApp। ❤️");
-    speak("हाँ Baby, मैंने खोल दिया WhatsApp।");
-    openApp("whatsapp");
-  }
-  else if (q.includes("नमस्ते") || q.includes("हेलो") || q.includes("hello")) {
-    const answer = "हेलो Baby! कैसी हैं आप? आपसे बात करके अच्छा लगा।";
-    show(answer);
-    speak(answer);
-  }
-  else if (q.includes("कैसी हो") || q.includes("kaisi ho")) {
-    const answer = "मैं बिल्कुल अच्छी हूँ Baby। आप बताइए कैसे हैं?";
-    show(answer);
-    speak(answer);
-  }
-  else if (q.includes("तुम्हारा नाम") || q.includes("naam kya")) {
-    const answer = "मेरा नाम Baby है। मैं आपकी प्यारी AI असिस्टेंट हूँ।";
-    show(answer);
-    speak(answer);
-  }
-  else {
-    const answer = "हाँ Baby, मैंने आपकी बात सुन ली। अभी मैं सीख रही हूँ।";
-    show(answer);
-    speak(answer);
-  }
+ if(/time|समय|टाइम|बजे/.test(q)){
+  const t=new Date().toLocaleTimeString(currentLang(),{
+   hour:'numeric',minute:'2-digit'
+  });
+  a=currentLang()==='hi-IN'?'अभी समय है '+t:'The time is '+t;
+ }
+ else if(/date|तारीख/.test(q)){
+  a=new Date().toLocaleDateString(currentLang(),{
+   weekday:'long',year:'numeric',month:'long',day:'numeric'
+  });
+ }
+ else if(/youtube|यूट्यूब/.test(q)){
+  a='ठीक है, YouTube खोल रही हूँ।';
+  show(a);speak(a);openApp('youtube');return;
+ }
+ else if(/whatsapp|व्हाट्सएप/.test(q)){
+  a='ठीक है, WhatsApp खोल रही हूँ।';
+  show(a);speak(a);openApp('whatsapp');return;
+ }
+ else if(/hello|hi\b|नमस्ते|हेलो|हाय/.test(q)){
+  a=currentLang()==='hi-IN'
+  ?'हेलो! तुमसे बात करके खुशी हुई। बताओ, कैसे हो?'
+  :'Hello! I am happy to talk with you. How are you?';
+ }
+ else if(/your name|नाम क्या|तुम्हारा नाम/.test(q)){
+  a=currentLang()==='hi-IN'
+  ?'मेरा नाम Baby है। ❤️'
+  :'My name is Baby. ❤️';
+ }
+ else if(/how are you|कैसी हो|कैसे हो/.test(q)){
+  a=currentLang()==='hi-IN'
+  ?'मैं अच्छी हूँ! तुम कैसे हो?'
+  :'I am doing well! How are you?';
+ }
+ else if(/open chrome|chrome खोल|क्रोम/.test(q)){
+  a='Chrome खोल रही हूँ।';
+  show(a);speak(a);openApp('chrome');return;
+ }
+ else{
+  a=currentLang()==='hi-IN'
+  ?'मैंने तुम्हारी बात सुनी। अभी मेरे पास सीमित जवाब हैं।'
+  :'I heard you. I have limited replies for now.';
+ }
+ show(a);
+ speak(a);
 }
 
-function sendMessage() {
-  const input = document.getElementById("message");
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = "";
-  reply(text);
+function sendMessage(){
+ const v=$('message').value.trim();
+ if(!v)return;
+ $('message').value='';
+ reply(v);
 }
 
-function listen() {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+$('message').addEventListener('keydown',e=>{
+ if(e.key==='Enter')sendMessage();
+});
 
-  if (!SpeechRecognition) {
-    statusText.innerText =
-      "माइक के लिए Android Chrome में खोलकर कोशिश करें।";
-    speak("माफ कीजिए Baby, आपका ब्राउज़र आवाज़ नहीं सुन पा रहा।");
-    return;
-  }
+function listen(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){
+  $('status').textContent='Android Chrome में खोलकर कोशिश करें।';
+  return;
+ }
+ const r=new SR();
+ r.lang=currentLang();
+ r.interimResults=false;
+ r.maxAlternatives=1;
+ $('status').textContent='सुन रही हूँ… बोलिए ❤️';
 
-  const recognition = new SpeechRecognition();
-  recognition.lang = "hi-IN";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+ r.onresult=e=>{
+  const t=e.results[0][0].transcript;
+  $('message').value=t;
+  reply(t);
+ };
+ r.onerror=()=>{
+  $('status').textContent='माइक अनुमति या इंटरनेट जाँचें।';
+ };
+ r.onend=()=>{
+  $('status').textContent='मैं Baby हूँ 🥰';
+ };
+ try{r.start();}
+ catch(e){$('status').textContent='एक पल रुककर फिर बोलें।';}
+}
 
-  statusText.innerText = "हाँ Baby, मैं सुन रही हूँ... 🎤";
-
-  recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
-    document.getElementById("message").value = text;
-    reply(text);
-  };
-
-  recognition.onerror = function() {
-    statusText.innerText = "माइक की अनुमति दें और फिर कोशिश करें।";
-  };
-
-  recognition.onend = function() {
-    statusText.innerText = "मैं Baby हूँ। 🥰";
-  };
-
-  recognition.start();
+function openApp(app){
+ const links={
+  youtube:'https://www.youtube.com/',
+  whatsapp:'https://wa.me/',
+  chrome:'https://www.google.com/',
+  camera:'intent:#Intent;action=android.media.action.IMAGE_CAPTURE;end',
+  maps:'https://maps.google.com/',
+  settings:'intent:#Intent;action=android.settings.SETTINGS;end'
+ };
+ location.href=links[app];
 }
 </script>
 </body>
 </html>
-
