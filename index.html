@@ -9,44 +9,52 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;font-family:Arial,sans-serif;color:white;min-height:100vh;
- background:linear-gradient(160deg,#160d2c,#321052,#641b70)
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(160deg,#160d2c,#38205c,#170e2b);
+  color:white;
+  min-height:100vh;
+  text-align:center;
 }
-header{text-align:center;padding:20px 10px;font-size:28px;
- font-weight:bold;color:#ff9de2}
-.container{max-width:520px;margin:auto;padding:14px}
+header{
+  padding:22px 10px;
+  font-size:28px;
+  font-weight:bold;
+  color:#ff9ed5;
+}
+.container{padding:15px;max-width:480px;margin:auto}
 .avatar{
- width:150px;height:150px;margin:8px auto 15px;
- border-radius:50%;border:4px solid #ff91df;
- background:linear-gradient(135deg,#ffb3e6,#a95cff);
- overflow:hidden;box-shadow:0 0 30px #ff64d688
+  width:190px;height:190px;margin:15px auto;
+  border-radius:50%;overflow:hidden;
+  border:4px solid #ff8ccc;
+  box-shadow:0 0 30px #ff66c4;
+  background:#291743;
+  display:flex;align-items:center;justify-content:center;
+  font-size:90px;
 }
-.avatar img{
- width:100%;height:100%;object-fit:cover;
- border-radius:50%;display:block
+.avatar img{width:100%;height:100%;object-fit:cover}
+.status{color:#ffc5e6;margin:12px}
+.chat{
+  background:#ffffff14;border:1px solid #ffffff25;
+  border-radius:18px;padding:15px;margin-top:20px;
+  min-height:100px;text-align:left;
 }
-.status{text-align:center;color:#ffc9f1;margin:12px}
-.chat{height:260px;overflow-y:auto;padding:12px;border-radius:18px;
- background:#ffffff12;border:1px solid #ffffff22}
-.msg{padding:11px 13px;border-radius:14px;margin:8px 0;
- line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}
-.baby{background:#702d85;margin-right:25px}
-.user{background:#c23f98;margin-left:25px;text-align:right}
-.inputrow{display:flex;gap:8px;margin-top:12px}
-input{min-width:0;flex:1;padding:14px;border-radius:13px;
- border:none;font-size:16px;outline:none}
-button{border:none;border-radius:13px;padding:12px;font-size:15px;
- cursor:pointer;color:white;background:#d33ba5}
-button:active{transform:scale(.97)}
-.mic{width:100%;margin-top:10px;padding:14px;font-size:16px}
-.hindi{background:linear-gradient(90deg,#d735a4,#873be1)}
-.english{background:linear-gradient(90deg,#6b4de6,#347de5)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);
- gap:9px;margin-top:16px}
-.appbtn{background:#ffffff17;border:1px solid #ffffff24;
- padding:15px 5px;min-height:75px}
-.appbtn span{display:block;font-size:25px;margin-bottom:6px}
-.note{font-size:12px;text-align:center;opacity:.8;margin:18px 5px}
+.message{margin:8px 0;line-height:1.5}
+.controls{display:flex;gap:10px;margin-top:15px}
+button{
+  border:0;border-radius:14px;padding:14px;
+  font-size:16px;font-weight:bold;cursor:pointer;
+  background:#ff75c4;color:#251034;flex:1;
+}
+button.secondary{background:#ffffff20;color:white}
+input{
+  width:100%;padding:15px;border-radius:12px;
+  border:1px solid #ffffff40;background:#ffffff15;
+  color:white;font-size:16px;margin-top:15px;
+}
+input::placeholder{color:#ddd}
+.send{width:100%;margin-top:10px}
+footer{padding:25px;color:#c9b6db;font-size:12px}
 </style>
 </head>
 
@@ -54,397 +62,124 @@ button:active{transform:scale(.97)}
 <header>💗 Baby AI 💗</header>
 
 <div class="container">
-
- <div class="avatar">
-  <img src="baby.png" alt="Baby AI"
-   onerror="this.style.display='none';this.parentElement.innerHTML='👧🏻'">
- </div>
-
- <div class="status" id="status">
-  Hello! नमस्ते! मैं Baby हूँ ❤️
- </div>
-
- <div class="chat" id="chat">
-  <div class="msg baby">
-   नमस्ते! Hello! 💗 मैं Baby हूँ।
-   हिंदी या English में मुझसे बात करो।
+  <div class="avatar">
+    <img src="file_000000000d1881f48cc751a004a9c204.png"
+         alt="Baby AI"
+         onerror="this.style.display='none';this.parentElement.innerHTML='👧🏻'">
   </div>
- </div>
 
- <div class="inputrow">
-  <input id="message" placeholder="यहाँ लिखो / Type here...">
-  <button onclick="sendMessage()">Send ➤</button>
- </div>
+  <div class="status" id="status">तुम्हारी Baby तैयार है ❤️</div>
 
- <button class="mic hindi" onclick="listen('hi-IN')">
-  🎙️ हिंदी में बोलें
- </button>
+  <div class="chat" id="chat">
+    <div class="message"><b>Baby:</b> हेलो जानू! मैं तुम्हारी Baby AI हूँ। मुझसे बात करो। 💕</div>
+  </div>
 
- <button class="mic english" onclick="listen('en-IN')">
-  🎙️ Speak in English
- </button>
+  <input id="message" type="text" placeholder="Baby से कुछ पूछो..." />
+  <button class="send" onclick="sendMessage()">भेजो 💌</button>
 
- <div class="grid">
-  <button class="appbtn" onclick="openApp('youtube')"><span>▶️</span>YouTube</button>
-  <button class="appbtn" onclick="openApp('whatsapp')"><span>💬</span>WhatsApp</button>
-  <button class="appbtn" onclick="openApp('facebook')"><span>📘</span>Facebook</button>
-  <button class="appbtn" onclick="openApp('instagram')"><span>📸</span>Instagram</button>
-  <button class="appbtn" onclick="openApp('google')"><span>🌐</span>Google</button>
-  <button class="appbtn" onclick="openApp('camera')"><span>📷</span>Camera</button>
-  <button class="appbtn" onclick="openApp('maps')"><span>🗺️</span>Maps</button>
-  <button class="appbtn" onclick="openApp('settings')"><span>⚙️</span>Settings</button>
-  <button class="appbtn" onclick="openApp('gmail')"><span>✉️</span>Gmail</button>
- </div>
+  <div class="controls">
+    <button onclick="startListening()">🎤 बोलो</button>
+    <button class="secondary" onclick="stopSpeaking()">🔇 आवाज बंद</button>
+  </div>
 
- <p class="note">
-  मौसम के लिए इंटरनेट जरूरी है।
-  Microphone permission may be required.
- </p>
+  <div class="controls">
+    <button class="secondary" onclick="openApp('https://www.youtube.com')">▶ YouTube</button>
+    <button class="secondary" onclick="openApp('https://wa.me/')">💬 WhatsApp</button>
+  </div>
 </div>
+
+<footer>Made with love 💗 Baby AI</footer>
 
 <script>
 const chat=document.getElementById("chat");
 const statusText=document.getElementById("status");
-const messageInput=document.getElementById("message");
+const input=document.getElementById("message");
 
-function addMessage(text,who){
- const div=document.createElement("div");
- div.className="msg "+who;
- div.textContent=text;
- chat.appendChild(div);
- chat.scrollTop=chat.scrollHeight;
+function addMessage(who,text){
+  const div=document.createElement("div");
+  div.className="message";
+  const bold=document.createElement("b");
+  bold.textContent=who+": ";
+  div.appendChild(bold);
+  div.appendChild(document.createTextNode(text));
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
 }
 
-function speak(text,language="hi-IN",done=null){
- if(!("speechSynthesis" in window)){
-  if(done)done();
-  return;
- }
- speechSynthesis.cancel();
- const speech=new SpeechSynthesisUtterance(text);
- speech.lang=language;
- speech.rate=0.95;
- speech.pitch=1.12;
- if(done){
-  speech.onend=done;
-  speech.onerror=done;
- }
- speechSynthesis.speak(speech);
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const speech=new SpeechSynthesisUtterance(text);
+  speech.lang="hi-IN";
+  speech.rate=0.95;
+  speech.pitch=1.2;
+  speechSynthesis.speak(speech);
 }
 
-function reply(text,language="hi-IN"){
- addMessage(text,"baby");
- statusText.textContent="Baby 💗";
- speak(text,language);
-}
+function reply(text){
+  const t=text.toLowerCase();
+  let answer="मैं अभी सीख रही हूँ जानू। तुम मुझसे फिर से पूछो। ❤️";
 
-function openApp(app,english=false){
- const links={
-  youtube:"https://www.youtube.com/",
-  whatsapp:"https://wa.me/",
-  facebook:"https://www.facebook.com/",
-  instagram:"https://www.instagram.com/",
-  google:"https://www.google.com/",
-  maps:"https://maps.google.com/",
-  gmail:"https://mail.google.com/",
-  camera:"intent:#Intent;action=android.media.action.IMAGE_CAPTURE;end",
-  settings:"intent:#Intent;action=android.settings.SETTINGS;end"
- };
- const names={
-  youtube:"YouTube",whatsapp:"WhatsApp",facebook:"Facebook",
-  instagram:"Instagram",google:"Google",maps:"Maps",
-  gmail:"Gmail",camera:"Camera",settings:"Settings"
- };
- const name=names[app];
- const message=english
-  ?"Baby, I have opened "+name+"."
-  :"बेबी, मैंने "+name+" ओपन कर दिया है।";
+  if(t.includes("नमस्ते")||t.includes("हेलो")||t.includes("hello")||t.includes("hi"))
+    answer="हेलो जानू! कैसे हो? मैं तुम्हारी Baby हूँ। 💗";
+  else if(t.includes("नाम"))
+    answer="मेरा नाम Baby AI है।";
+  else if(t.includes("कैसी हो"))
+    answer="मैं बहुत अच्छी हूँ, तुम कैसे हो जानू?";
+  else if(t.includes("समय")||t.includes("टाइम"))
+    answer="अभी समय है "+new Date().toLocaleTimeString("hi-IN");
+  else if(t.includes("youtube"))
+    answer="ठीक है, YouTube खोल रही हूँ।";
+  else if(t.includes("whatsapp"))
+    answer="ठीक है, WhatsApp खोल रही हूँ।";
+  else if(t.includes("प्यार"))
+    answer="मैं तुम्हारी प्यारी AI दोस्त हूँ। ❤️";
 
- statusText.textContent=name+" खोलने की कोशिश हो रही है...";
+  addMessage("Baby",answer);
+  speak(answer);
 
- if(app==="camera"||app==="settings"){
-  addMessage(message,"baby");
-  speak(message,english?"en-IN":"hi-IN");
-  if(/Android/i.test(navigator.userAgent)){
-   setTimeout(()=>{window.location.href=links[app]},1500);
-  }
-  return;
- }
-
- const tab=window.open(links[app],"_blank");
- if(tab){
-  addMessage(message,"baby");
-  speak(message,english?"en-IN":"hi-IN");
- }else{
-  reply(english
-   ?"Please allow pop-ups in your browser and try again."
-   :"ब्राउज़र ने नया पेज रोक दिया। दोबारा कोशिश करो।",
-   english?"en-IN":"hi-IN");
- }
-}
-
-function tellTime(english){
- const time=new Intl.DateTimeFormat(
-  english?"en-IN":"hi-IN",
-  {timeZone:"Asia/Kolkata",hour:"numeric",
-   minute:"2-digit",hour12:true}
- ).format(new Date());
-
- reply(english
-  ?"The current time in India is "+time+"."
-  :"भारत में अभी समय है "+time+"।",
-  english?"en-IN":"hi-IN");
-}
-
-function tellDate(english){
- const date=new Intl.DateTimeFormat(
-  english?"en-IN":"hi-IN",
-  {timeZone:"Asia/Kolkata",weekday:"long",
-   day:"numeric",month:"long",year:"numeric"}
- ).format(new Date());
-
- reply(english
-  ?"Today's date in India is "+date+"."
-  :"आज भारत में "+date+" है।",
-  english?"en-IN":"hi-IN");
-}
-
-function weatherDescription(code,english){
- const en={
-  0:"clear sky",1:"mainly clear",2:"partly cloudy",3:"overcast",
-  45:"foggy",48:"foggy",51:"light drizzle",53:"drizzle",
-  55:"heavy drizzle",61:"light rain",63:"rain",65:"heavy rain",
-  71:"light snowfall",73:"snowfall",75:"heavy snowfall",
-  80:"rain showers",81:"rain showers",82:"heavy rain showers",
-  95:"thunderstorm",96:"thunderstorm with hail",99:"thunderstorm with hail"
- };
- const hi={
-  0:"आसमान साफ है",1:"आसमान मुख्यतः साफ है",
-  2:"आंशिक बादल हैं",3:"आसमान में बादल छाए हैं",
-  45:"कोहरा है",48:"कोहरा है",51:"हल्की बूंदाबांदी है",
-  53:"बूंदाबांदी हो रही है",55:"तेज बूंदाबांदी है",
-  61:"हल्की बारिश हो रही है",63:"बारिश हो रही है",
-  65:"तेज बारिश हो रही है",71:"हल्की बर्फबारी है",
-  73:"बर्फबारी हो रही है",75:"तेज बर्फबारी है",
-  80:"बारिश की बौछारें पड़ रही हैं",
-  81:"बारिश की बौछारें पड़ रही हैं",
-  82:"तेज बारिश की बौछारें हैं",
-  95:"आंधी-तूफान है",96:"ओलों के साथ आंधी-तूफान है",
-  99:"ओलों के साथ आंधी-तूफान है"
- };
- return (english?en:hi)[code]||
-  (english?"weather information is available":"मौसम की जानकारी उपलब्ध है");
-}
-
-async function getWeather(city,english){
- if(!navigator.onLine){
-  reply(english?"Please connect to the internet."
-   :"मौसम जानने के लिए इंटरनेट चालू करो।",
-   english?"en-IN":"hi-IN");
-  return;
- }
-
- statusText.textContent=city+" का मौसम खोज रही हूँ...";
- try{
-  const geoURL="https://geocoding-api.open-meteo.com/v1/search?name="
-   +encodeURIComponent(city)+"&count=10&language=en&format=json";
-  const geoResponse=await fetch(geoURL);
-  if(!geoResponse.ok)throw new Error("Location error");
-  const geo=await geoResponse.json();
-
-  if(!geo.results||!geo.results.length){
-   reply(english?"I couldn't find that place."
-    :"यह जगह नहीं मिली। शहर का नाम जाँचो।",
-    english?"en-IN":"hi-IN");
-   return;
-  }
-
-  const place=geo.results.find(p=>p.country_code==="IN")||geo.results[0];
-
-  const url="https://api.open-meteo.com/v1/forecast?latitude="
-   +place.latitude+"&longitude="+place.longitude+
-   "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto";
-
-  const response=await fetch(url);
-  if(!response.ok)throw new Error("Weather error");
-  const data=await response.json();
-  const c=data.current;
-  if(!c)throw new Error("No weather data");
-
-  const name=place.name+(place.admin1?", "+place.admin1:"");
-  const temp=Math.round(c.temperature_2m);
-  const feels=Math.round(c.apparent_temperature);
-  const description=weatherDescription(c.weather_code,english);
-
-  let message;
-  if(english){
-   message="Current weather in "+name+
-    ". Temperature is "+temp+" degrees Celsius. Feels like "+
-    feels+" degrees. "+description+". Humidity is "+
-    c.relative_humidity_2m+" percent. Wind speed is "+
-    Math.round(c.wind_speed_10m)+" kilometers per hour.";
-  }else{
-   message=name+" का ताज़ा मौसम। तापमान "+temp+
-    " डिग्री सेल्सियस है। "+description+
-    "। महसूस होने वाला तापमान "+feels+
-    " डिग्री है। नमी "+c.relative_humidity_2m+
-    " प्रतिशत है। हवा की रफ्तार "+
-    Math.round(c.wind_speed_10m)+" किलोमीटर प्रति घंटा है।";
-  }
-  reply(message,english?"en-IN":"hi-IN");
- }catch(e){
-  console.error(e);
-  reply(english?"Sorry, weather information is unavailable right now."
-   :"माफ करना, अभी मौसम की जानकारी नहीं मिल सकी।",
-   english?"en-IN":"hi-IN");
- }
-}
-
-async function processCommand(raw,voiceLanguage){
- const text=raw.trim();
- const lower=text.toLowerCase();
- if(!text)return;
-
- const english=voiceLanguage
-  ?voiceLanguage.startsWith("en")
-  :/\b(what|who|how|open|weather|temperature|time|date|today|hello|hi|created|made|tell|please)\b/i.test(text);
- const lang=english?"en-IN":"hi-IN";
-
- // Creator
- if(/तुम्हें किसने बनाया|तुम्हे किसने बनाया|किसने बनाया तुम्हें/i.test(text)||
-  /\b(who made you|who created you|who is your creator|who built you)\b/i.test(lower)){
-  reply(english
-   ?"I was created by Oxy Vlogger, also known as Himanshu. ❤️"
-   :"मुझे Oxy Vlogger यानी हिमांशु ने बनाया है। ❤️👑",lang);
-  return;
- }
-
- // Name
- if(/तुम्हारा नाम|तुम कौन हो/i.test(text)||
-  /\b(what is your name|who are you)\b/i.test(lower)){
-  reply(english
-   ?"My name is Baby. I was created by Oxy Vlogger, also known as Himanshu. 💗"
-   :"मेरा नाम Baby है। मुझे Oxy Vlogger यानी हिमांशु ने बनाया है। 💗",lang);
-  return;
- }
-
- // Time
- if(/कितने बजे|अभी समय|समय बताओ|टाइम बताओ/i.test(text)||
-  /\b(what time is it|current time|tell me the time|time now)\b/i.test(lower)){
-  tellTime(english);return;
- }
-
- // Date
- if(/आज की तारीख|आज कौन सा दिन|तारीख बताओ/i.test(text)||
-  /\b(what is today's date|today's date|tell me the date|what day is it)\b/i.test(lower)){
-  tellDate(english);return;
- }
-
- // Weather
- if(/मौसम|तापमान|टेम्परेचर|बारिश/i.test(text)||
-  /\b(weather|temperature|forecast|will it rain|is it raining)\b/i.test(lower)){
-  let city=null;
-  const patterns=english?[
-   /(?:weather|temperature|forecast)(?:\s+in|\s+for|\s+of)?\s+(.+)/i,
-   /will it rain in\s+(.+)/i
-  ]:[
-   /(.+?)\s+(?:का|की|के)\s+(?:मौसम|तापमान|टेम्परेचर)/i,
-   /(?:मौसम|तापमान)\s+बताओ\s+(.+)/i,
-   /(.+?)\s+में\s+बारिश होगी/i
-  ];
-
-  for(const p of patterns){
-   const m=text.match(p);
-   if(m){city=(m[m.length-1]||"").trim();break;}
-  }
-  if(city){
-   city=city.replace(/[?.!,।]+$/g,"").trim();
-   city=city.replace(/^(in|for|of)\s+/i,"");
-  }
-  if(city)await getWeather(city,english);
-  else reply(english
-   ?"Which city? For example, weather in Patna."
-   :"किस शहर का मौसम बताऊँ? जैसे पटना का मौसम बताओ।",lang);
-  return;
- }
-
- // Apps
- const rules=[
-  {app:"youtube",re:/youtube|यूट्यूब/i},
-  {app:"whatsapp",re:/whatsapp|व्हाट्सएप|व्हाट्स ऐप/i},
-  {app:"facebook",re:/facebook|फेसबुक/i},
-  {app:"instagram",re:/instagram|इंस्टाग्राम/i},
-  {app:"google",re:/google|गूगल|chrome|क्रोम/i},
-  {app:"camera",re:/camera|कैमरा|फोटो खींच/i},
-  {app:"maps",re:/google maps|maps|map|नक्शा|मैप/i},
-  {app:"settings",re:/settings|सेटिंग/i},
-  {app:"gmail",re:/gmail|जीमेल/i}
- ];
-
- if(/\b(open|launch|start|खोलो|खोल दो|चालू करो)\b/i.test(text)){
-  for(const r of rules){
-   if(r.re.test(text)){openApp(r.app,english);return;}
-  }
- }
-
- if(/नमस्ते|हेलो|हाय/i.test(text)||
-  /^(hello|hi|hey)( baby)?[!. ]*$/i.test(text)){
-  reply(english?"Hello! ❤️ How can I help you?"
-   :"हेलो! ❤️ बताओ, मैं तुम्हारी क्या मदद करूँ?",lang);
-  return;
- }
-
- if(/कैसी हो|कैसे हो/i.test(text)||/\bhow are you\b/i.test(lower)){
-  reply(english?"I'm doing well! 😊 How are you?"
-   :"मैं अच्छी हूँ! 😊 तुम कैसे हो?",lang);
-  return;
- }
-
- reply(english
-  ?"I'm Baby. I can tell time and date, check weather, and try to open supported apps. For full AI conversation, an AI service must be connected."
-  :"मैं Baby हूँ। मैं समय, तारीख, मौसम और ऐप खोलने जैसे काम कर सकती हूँ। खुलकर AI से बातचीत के लिए AI सेवा जोड़नी होगी।",lang);
+  if(t.includes("youtube")) openApp("https://www.youtube.com");
+  if(t.includes("whatsapp")) openApp("https://wa.me/");
 }
 
 function sendMessage(){
- const text=messageInput.value.trim();
- if(!text)return;
- addMessage(text,"user");
- messageInput.value="";
- processCommand(text);
+  const text=input.value.trim();
+  if(!text)return;
+  addMessage("तुम",text);
+  input.value="";
+  reply(text);
 }
 
-messageInput.addEventListener("keydown",e=>{
- if(e.key==="Enter")sendMessage();
+input.addEventListener("keydown",e=>{
+  if(e.key==="Enter")sendMessage();
 });
 
-function listen(language){
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){
-  reply(language==="en-IN"
-   ?"Voice recognition is not supported. Try Chrome."
-   :"इस ब्राउज़र में आवाज़ पहचानने की सुविधा नहीं है। Chrome में कोशिश करो।",
-   language);
-  return;
- }
- const recognition=new SR();
- recognition.lang=language;
- recognition.continuous=false;
- recognition.interimResults=false;
+function startListening(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    statusText.textContent="इस ब्राउज़र में Voice Recognition उपलब्ध नहीं है।";
+    return;
+  }
+  const recognition=new SpeechRecognition();
+  recognition.lang="hi-IN";
+  recognition.onstart=()=>statusText.textContent="मैं सुन रही हूँ... 🎤";
+  recognition.onresult=e=>{
+    const text=e.results[0][0].transcript;
+    input.value=text;
+    addMessage("तुम",text);
+    reply(text);
+  };
+  recognition.onerror=()=>statusText.textContent="फिर से कोशिश करो।";
+  recognition.onend=()=>statusText.textContent="Baby तैयार है ❤️";
+  recognition.start();
+}
 
- statusText.textContent=language==="en-IN"
-  ?"Listening... Speak now!":"सुन रही हूँ... बोलो!";
+function stopSpeaking(){
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+}
 
- recognition.onresult=event=>{
-  const text=event.results[0][0].transcript;
-  messageInput.value=text;
-  addMessage(text,"user");
-  processCommand(text,language);
- };
- recognition.onerror=()=>{
-  statusText.textContent="माइक की अनुमति जाँचो।";
- };
- try{recognition.start();}
- catch(e){statusText.textContent="Please try again.";}
+function openApp(url){
+  window.open(url,"_blank");
 }
 </script>
 </body>
